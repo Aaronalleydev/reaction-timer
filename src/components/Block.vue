@@ -1,6 +1,6 @@
 <template>
 <div class="blockContainer">
-  <div class="block" v-if="showBlock" @click="stopTimer"> 
+  <div class="block" :style="{marginTop: randomY + 'px', marginLeft: randomX + 'px'}" v-if="showBlock" @click="stopTimer"> 
     Click Me
   </div>
  </div> 
@@ -13,7 +13,10 @@ export default {
     return {
       showBlock: false,
       timer: null, 
-      reactionTime: 0
+      reactionTime: 0,
+      randomX:  Math.round(Math.random() * window.innerWidth),
+      randomY: Math.round(Math.random() * window.innerHeight),
+
     }
   },
   mounted() {
@@ -21,6 +24,7 @@ export default {
       this.showBlock = true
       this.startTimer()
     }, this.delay)
+  
   },
   methods: {
     startTimer() {
@@ -32,6 +36,12 @@ export default {
       clearInterval(this.timer)
       this.$emit('end', this.reactionTime)
     },
+     
+  },
+  computed: {
+    randomPosition() {
+      this.$emit('randomPos', this.randomX, this.randomY)
+    }
   }
 }
 </script>
@@ -39,7 +49,7 @@ export default {
 <style>
   .blockContainer {
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
     background-color: grey;
   }
   .block {
@@ -47,8 +57,8 @@ export default {
     border-radius: 20px;
     background: #0faf87;
     color: white;
-    text-align: center;
+    /* text-align: center; */
     padding: 100px 0;
-    margin: 40px auto;
+    float: left;
   }
 </style>

@@ -33,7 +33,8 @@ export default {
   padding: 0;
   width: 200px;
   height: 100px;
-  border: 1px solid red;
+  border: 1px solid grey;
+  border-radius: 5px;
   background: #0faf87;
   color: white;
   text-align: center;
